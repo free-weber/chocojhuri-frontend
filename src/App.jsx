@@ -759,7 +759,7 @@ const OrderModal = ({ product, isOpen, onClose }) => {
                   onClick={openMessenger}
                   disabled={!isCopied}
                 >
-                  <Facebook className="w-5 h-5 mr-2 shrink-0" /> <span className="truncate">Messenger-এ অর্ডার নিশ্চিত করুন</span>
+                  <FaFacebook className="w-5 h-5 mr-2 shrink-0" /> <span className="truncate">Messenger-এ অর্ডার নিশ্চিত করুন</span>
                 </Button>
               </div>
               <button className="mt-5 text-sm text-gray-500 w-full text-center hover:text-[#402014] hover:underline font-medium transition-colors" onClick={() => setStep(1)}>
@@ -1153,7 +1153,7 @@ const Header = () => (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm border-b border-[#EBF7D3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center">
-          <img src="../public/logo.svg" alt="ChocoJhuri Logo" className="h-20 md:h-24" />
+          <img src="/logo.svg" alt="ChocoJhuri Logo" className="h-20 md:h-24" />
         </a>
         <nav className="hidden md:flex items-center gap-6 font-medium text-[#5E4D46]">
           <a href="#products" className="hover:text-[#402014] transition">কম্বো প্যাকেজ</a>
