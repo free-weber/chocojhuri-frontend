@@ -4,18 +4,35 @@ import {
   Search, Eye, ShoppingCart, Plus, Minus, MessageCircle, 
   Info, Star, ShieldCheck, Truck, ChevronLeft, ChevronRight, Copy, AlertCircle
 } from 'lucide-react';
-import { FaFacebook } from 'react-icons/fa';
 
 const SITE_CONFIG = {
   brandName: "Chocoঝুড়ি",
-  whatsappNumber: "+8801700000000",
+  whatsappNumber: "+8801753379005",
   messengerPageId: "demo.chocojhuri",
+  logoUrl: "https://res.cloudinary.com/dfkg9envn/image/upload/v1792491915/Gemini_Generated_Image_f16u4mf16u4mf16u_dqyprv.jpg", // আপনার .webp লোগোর লিংকটি এখানে দিন
   deliveryFee: {
-    insideDhaka: 60,
+    insideDhaka: 80,
     outsideDhaka: 120
   },
   currency: "৳",
 };
+
+// Custom SVG for Facebook to prevent lucide-react production build bundling issues
+const FacebookIcon = ({ className = "w-5 h-5" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+);
+
+// Custom Brand Logo component supporting WebP image link
+const BrandLogo = ({ className = "h-10 md:h-12" }) => (
+  <img 
+    src={SITE_CONFIG.logoUrl} 
+    alt={SITE_CONFIG.brandName} 
+    className={`${className} object-contain`} 
+    loading="eager"
+  />
+);
 
 // Global styles injecting new fonts and brand colors
 const GlobalStyles = () => (
@@ -759,7 +776,7 @@ const OrderModal = ({ product, isOpen, onClose }) => {
                   onClick={openMessenger}
                   disabled={!isCopied}
                 >
-                  <FaFacebook className="w-5 h-5 mr-2 shrink-0" /> <span className="truncate">Messenger-এ অর্ডার নিশ্চিত করুন</span>
+                  <FacebookIcon className="w-5 h-5 mr-2 shrink-0" /> <span className="truncate">Messenger-এ অর্ডার নিশ্চিত করুন</span>
                 </Button>
               </div>
               <button className="mt-5 text-sm text-gray-500 w-full text-center hover:text-[#402014] hover:underline font-medium transition-colors" onClick={() => setStep(1)}>
@@ -1153,7 +1170,7 @@ const Header = () => (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm border-b border-[#EBF7D3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center">
-          <img src="/logo.svg" alt="ChocoJhuri Logo" className="h-20 md:h-24" />
+          <BrandLogo className="h-14 md:h-18" />
         </a>
         <nav className="hidden md:flex items-center gap-6 font-medium text-[#5E4D46]">
           <a href="#products" className="hover:text-[#402014] transition">কম্বো প্যাকেজ</a>
@@ -1267,9 +1284,10 @@ const Footer = () => (
   <footer className="bg-[#402014] text-[#FFFBEA] py-12 border-t-4 border-[#D8F3B0]">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>
-        <a href="#" className="flex items-center gap-2 text-3xl font-pacifico text-[#D8F3B0] mb-4">
-          <ShoppingBag className="w-8 h-8" />
-          {SITE_CONFIG.brandName}
+        <a href="#" className="inline-block mb-4">
+          <div className="bg-[#FFFBEA] p-2 rounded-xl inline-block shadow-md">
+            <BrandLogo className="h-10 md:h-12" />
+          </div>
         </a>
         <p className="text-[#EBF7D3]/80 text-sm max-w-xs leading-relaxed">
           আপনার প্রিয়জনদের মুখে হাসি ফোটাতে বিশ্বের সেরা চকলেটগুলো আমরা নিয়ে এসেছি এক ছাদের নিচে।
@@ -1287,37 +1305,13 @@ const Footer = () => (
         <h4 className="text-lg font-playfair font-bold mb-4 text-[#FFFBEA]">যোগাযোগ</h4>
         <ul className="space-y-3 text-sm text-[#EBF7D3]/80">
           <li className="flex items-center gap-2"><Phone className="w-4 h-4" /> {SITE_CONFIG.whatsappNumber}</li>
-          <li className="flex items-center gap-2"><FaFacebook className="w-4 h-4" /> facebook.com/{SITE_CONFIG.messengerPageId}</li>
+          <li className="flex items-center gap-2"><FacebookIcon className="w-4 h-4" /> facebook.com/{SITE_CONFIG.messengerPageId}</li>
           <li className="flex items-start gap-2 mt-4 text-xs text-[#EBF7D3]/60 italic">
-            * এটি একটি ডেমো ওয়েবসাইট প্রজেক্ট। এর সাথে কোনো বাস্তব ব্যবসার সম্পর্ক নেই।
           </li>
         </ul>
       </div>
     </div>
   </footer>
-);
-
-const FloatingContact = () => (
-  <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
-    <a 
-      href={`https://m.me/${SITE_CONFIG.messengerPageId}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
-      aria-label="Contact on Messenger"
-    >
-      <FaFacebook className="w-8 h-8" />
-    </a>
-    <a 
-      href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
-      aria-label="Contact on WhatsApp"
-    >
-      <MessageCircle className="w-8 h-8" />
-    </a>
-  </div>
 );
 
 export default function App() {
@@ -1370,8 +1364,6 @@ export default function App() {
       </main>
 
       <Footer />
-      
-      <FloatingContact />
 
       <ProductModal 
         isOpen={isDetailsModalOpen} 
